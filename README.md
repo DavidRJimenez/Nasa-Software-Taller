@@ -6,6 +6,15 @@ Este repositorio contiene la implementación de dos proyectos web que demuestran
 
 ```
 Arquitectura_Sof/
+├── Punto1/              # Validación y almacenamiento de datos del usuario
+│   ├── index.html
+│   ├── styles.css
+│   └── script.js
+└── Punto2/              # Geolocalización y procesamiento con Web Worker
+│   ├── index.html
+│   ├── styles.css
+│   ├── main.js # Hilo principal
+│   └── worker.js # Web Worker
 ├── 3er Punto/           # Búsqueda Dinámica con Historial
 │   ├── Index.html
 │   ├── styles.css
@@ -22,6 +31,37 @@ Arquitectura_Sof/
 ```
 
 ---
+
+## Punto 1: Validación y Almacenamiento de Datos del Usuario
+
+### Descripción
+
+Formulario interactivo que solicita:
+- Nombre
+- Correo electrónico
+- Edad
+
+### Funcionalidades
+
+- Validación en el navegador usando `checkValidity()` y `setCustomValidity()`.
+- Validación personalizada:
+  - Todos los campos deben estar completos.
+  - El correo debe tener formato válido.
+  - La edad debe ser mayor a 18 años.
+- Almacenamiento de los datos en `localStorage` una vez validados.
+- Botón para visualizar en pantalla los datos almacenados.
+
+## Punto 2: Geolocalización y Web Worker
+
+### Descripción
+
+Aplicación que obtiene la ubicación del usuario mediante la API de geolocalización y delega el procesamiento de las coordenadas a un Web Worker.
+
+### Funcionalidades
+
+- Obtención de latitud y longitud con `navigator.geolocation`.
+- Envío de coordenadas a un Web Worker para simular una tarea (como formateo o cálculo).
+- El resultado procesado se devuelve al hilo principal y se muestra al usuario.
 
 ## 🔍 **PUNTO 3: Búsqueda Dinámica con Historial**
 

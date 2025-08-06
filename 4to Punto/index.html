@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA API Explorer - Imágenes y Datos Espaciales</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header principal -->
+        <header class="main-header">
+            <div class="header-content">
+                <h1 class="main-title">🚀 NASA API Explorer</h1>
+                <p class="subtitle">Explora el cosmos a través de las APIs oficiales de la NASA</p>
+            </div>
+            <div class="stars"></div>
+        </header>
+
+        <!-- Configuración de API Key -->
+        <section class="api-config">
+            <div class="config-container">
+                <h2>🔑 Configuración de API</h2>
+                <div class="api-key-input">
+                    <input type="text" id="apiKeyInput" placeholder="Ingresa tu NASA API Key aquí..." />
+                    <button id="saveApiKey">Guardar Key</button>
+                    <button id="useDemoKey">Usar Demo Key</button>
+                </div>
+                <p class="api-info">
+                    Obtén tu API Key gratuita en: 
+                    <a href="https://api.nasa.gov/" target="_blank">api.nasa.gov</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- Navegación entre módulos -->
+        <nav class="module-nav">
+            <button class="nav-btn active" data-module="apod">
+                🌌 Astronomy Picture
+            </button>
+            <button class="nav-btn" data-module="wms">
+                🛰️ Satellite Layers
+            </button>
+            <button class="nav-btn" data-module="mars">
+                🔴 Mars Rover Photos
+            </button>
+            <button class="nav-btn" data-module="tech">
+                🔬 Tech Transfer
+            </button>
+        </nav>
+
+        <!-- Módulo APOD -->
+        <section id="apod-module" class="module active">
+            <div class="module-header">
+                <h2>🌌 Astronomy Picture of the Day</h2>
+                <p>Descubre imágenes astronómicas increíbles con explicaciones científicas</p>
+            </div>
+            
+            <div class="controls">
+                <div class="date-selector">
+                    <label for="apodDate">Selecciona una fecha:</label>
+                    <input type="date" id="apodDate" max="">
+                    <button id="getApodBtn">Obtener Imagen</button>
+                    <button id="getRandomApodBtn">Imagen Aleatoria</button>
+                </div>
+            </div>
+
+            <div id="apodLoading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Cargando imagen astronómica...</p>
+            </div>
+
+            <div id="apodResults" class="results-container">
+                <!-- Resultados APOD aquí -->
+            </div>
+        </section>
+
+        <!-- Módulo WMS -->
+        <section id="wms-module" class="module">
+            <div class="module-header">
+                <h2>🛰️ Satellite Layers WMS</h2>
+                <p>Visualiza capas satelitales de la Tierra en tiempo real</p>
+            </div>
+
+            <div class="controls">
+                <div class="layer-selector">
+                    <label for="layerType">Tipo de capa:</label>
+                    <select id="layerType">
+                        <option value="MODIS_Terra_CorrectedReflectance_TrueColor">Color Real</option>
+                        <option value="MODIS_Terra_Land_Surface_Temp_Day">Temperatura Superficie</option>
+                        <option value="MODIS_Terra_Aerosol">Aerosol</option>
+                        <option value="MODIS_Terra_Cloud_Fraction_Day">Nubes</option>
+                    </select>
+                    <input type="date" id="wmsDate" max="">
+                    <button id="getWmsBtn">Obtener Imagen</button>
+                </div>
+            </div>
+
+            <div id="wmsLoading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Generando imagen satelital...</p>
+            </div>
+
+            <div id="wmsResults" class="results-container">
+                <!-- Resultados WMS aquí -->
+            </div>
+        </section>
+
+        <!-- Módulo Mars Rover -->
+        <section id="mars-module" class="module">
+            <div class="module-header">
+                <h2>🔴 Mars Rover Photos</h2>
+                <p>Explora fotografías capturadas por el rover Curiosity en Marte</p>
+            </div>
+
+            <div class="controls">
+                <div class="mars-controls">
+                    <div class="control-group">
+                        <label for="solInput">Sol (Día marciano):</label>
+                        <input type="number" id="solInput" min="1" max="4000" value="1000" placeholder="Ej: 1000">
+                    </div>
+                    <div class="control-group">
+                        <label for="cameraSelect">Cámara:</label>
+                        <select id="cameraSelect">
+                            <option value="">Todas las cámaras</option>
+                            <option value="FHAZ">Front Hazard</option>
+                            <option value="RHAZ">Rear Hazard</option>
+                            <option value="MAST">Mast Camera</option>
+                            <option value="CHEMCAM">Chemistry Camera</option>
+                            <option value="MAHLI">Mars Hand Lens</option>
+                            <option value="MARDI">Mars Descent</option>
+                            <option value="NAVCAM">Navigation Camera</option>
+                        </select>
+                    </div>
+                    <button id="getMarsBtn">Obtener Fotos</button>
+                    <button id="getRandomSolBtn">Sol Aleatorio</button>
+                </div>
+            </div>
+
+            <div id="marsLoading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Explorando Marte...</p>
+            </div>
+
+            <div id="marsResults" class="results-container">
+                <!-- Resultados Mars aquí -->
+            </div>
+        </section>
+
+        <!-- Módulo Tech Transfer -->
+        <section id="tech-module" class="module">
+            <div class="module-header">
+                <h2>🔬 NASA Tech Transfer</h2>
+                <p>Descubre patentes tecnológicas de la NASA con aplicaciones comerciales</p>
+            </div>
+
+            <div class="controls">
+                <div class="tech-controls">
+                    <div class="search-group">
+                        <input type="text" id="techSearchInput" placeholder="Buscar tecnologías (ej: solar, satellite, robotics)">
+                        <button id="searchTechBtn">Buscar</button>
+                    </div>
+                    <div class="limit-group">
+                        <label for="techLimit">Cantidad de resultados:</label>
+                        <select id="techLimit">
+                            <option value="10">10</option>
+                            <option value="20" selected>20</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div id="techLoading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Buscando tecnologías NASA...</p>
+            </div>
+
+            <div id="techResults" class="results-container">
+                <!-- Resultados Tech Transfer aquí -->
+            </div>
+        </section>
+
+        <!-- Error general -->
+        <div id="errorModal" class="modal hidden">
+            <div class="modal-content">
+                <h3>⚠️ Error</h3>
+                <p id="errorMessage"></p>
+                <button id="closeError">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="apod.js"></script>
+    <script src="wms.js"></script>
+    <script src="mars.js"></script>
+    <script src="tech.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

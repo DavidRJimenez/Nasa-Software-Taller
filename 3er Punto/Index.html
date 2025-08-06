@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Búsqueda Dinámica con Historial</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Búsqueda Dinámica de Posts</h1>
+            <p class="subtitle">Busca en los posts y navega por tu historial</p>
+        </header>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar posts..." autocomplete="off">
+                <button id="searchButton">
+                    <span class="search-icon">🔍</span>
+                </button>
+            </div>
+            
+            <div class="controls">
+                <button id="backButton" disabled>← Atrás</button>
+                <button id="clearButton">Limpiar</button>
+            </div>
+        </div>
+
+        <div id="loadingIndicator" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Cargando posts...</p>
+        </div>
+
+        <div id="searchInfo" class="search-info hidden">
+            <p>Búsqueda actual: <span id="currentSearch"></span></p>
+            <p>Resultados encontrados: <span id="resultCount">0</span></p>
+        </div>
+
+        <div id="resultsContainer" class="results-container">
+            <!-- Los resultados se mostrarán aquí -->
+        </div>
+
+        <div id="noResults" class="no-results hidden">
+            <h3>No se encontraron resultados</h3>
+            <p>Prueba con diferentes palabras clave</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
